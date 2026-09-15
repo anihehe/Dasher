@@ -1,0 +1,232 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.browser{width:100%;background:var(--surface-1);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;font-family:var(--font-sans);}
+.browser-bar{background:var(--surface-1);border-bottom:0.5px solid var(--border);padding:8px 12px;display:flex;align-items:center;gap:8px;}
+.dots{display:flex;gap:5px;}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--border-strong);}
+.urlbar{flex:1;background:var(--surface-0);border:0.5px solid var(--border);border-radius:5px;padding:4px 10px;font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;max-width:500px;margin:0 auto;}
+.screen{background:var(--surface-0);display:flex;height:560px;}
+.sidebar{width:160px;min-width:160px;background:var(--surface-1);border-right:0.5px solid var(--border);padding:12px 10px;display:flex;flex-direction:column;gap:12px;}
+.logo{font-size:13px;font-weight:500;color:var(--text-primary);padding:2px 6px;}
+.logo span{color:var(--text-accent);}
+.nav-s{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;padding:0 6px;margin-top:2px;}
+.nav-i{display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:5px;font-size:11px;color:var(--text-secondary);}
+.nav-i.active{background:var(--bg-accent);color:var(--text-accent);}
+.nav-i i{font-size:13px;}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:0.5px solid var(--border);background:var(--surface-2);}
+.topbar-t{font-size:12px;font-weight:500;color:var(--text-primary);}
+.rbtn{font-size:10px;color:var(--text-secondary);border:0.5px solid var(--border);border-radius:5px;padding:3px 7px;display:flex;align-items:center;gap:3px;}
+.content{padding:12px 16px;display:flex;flex-direction:column;gap:12px;overflow:hidden;}
+.mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;}
+.mc{background:var(--surface-1);border-radius:6px;padding:8px 10px;}
+.ml{font-size:9px;color:var(--text-muted);margin-bottom:3px;}
+.mv{font-size:17px;font-weight:500;color:var(--text-primary);}
+.mv.d{color:var(--text-danger);}
+.mv.w{color:var(--text-warning);}
+.msub{font-size:9px;color:var(--text-secondary);margin-top:1px;}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.st{font-size:11px;font-weight:500;color:var(--text-primary);}
+.sl{font-size:10px;color:var(--text-accent);}
+.tbl{border:0.5px solid var(--border);border-radius:6px;overflow:hidden;}
+.tbl-top{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--surface-1);border-bottom:0.5px solid var(--border);}
+.tbl-tt{font-size:10px;font-weight:500;color:var(--text-primary);}
+.fbtn{font-size:9px;color:var(--text-secondary);border:0.5px solid var(--border);border-radius:4px;padding:2px 6px;display:flex;align-items:center;gap:2px;}
+.thead{display:grid;grid-template-columns:68px 1fr 58px 90px 120px 55px;background:var(--surface-1);border-bottom:0.5px solid var(--border);padding:0 8px;}
+.th{font-size:9px;color:var(--text-muted);padding:5px 4px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;}
+.tr{display:grid;grid-template-columns:68px 1fr 58px 90px 120px 55px;padding:0 8px;border-bottom:0.5px solid var(--border);align-items:center;}
+.tr:last-child{border-bottom:none;}
+.tr.stale{border-left:2px solid var(--text-danger);padding-left:6px;}
+.tr.risk{border-left:2px solid var(--text-warning);padding-left:6px;}
+.tr.ok{border-left:2px solid var(--text-success);padding-left:6px;}
+.td{font-size:10px;color:var(--text-primary);padding:7px 4px;overflow:hidden;}
+.cid{font-family:var(--font-mono);font-size:9px;color:var(--text-muted);}
+.subj{font-size:10px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pnm{font-size:9px;color:var(--text-secondary);}
+.pb{font-size:9px;padding:1px 5px;border-radius:20px;font-weight:500;display:inline-block;}
+.p1{background:var(--bg-danger);color:var(--text-danger);}
+.p2{background:var(--bg-warning);color:var(--text-warning);}
+.p3{background:var(--surface-1);color:var(--text-secondary);border:0.5px solid var(--border);}
+.sf{font-size:9px;color:var(--text-danger);display:flex;align-items:center;gap:2px;}
+.of{font-size:9px;color:var(--text-secondary);}
+.ry{font-size:9px;color:var(--text-secondary);}
+.rt{font-size:9px;color:var(--text-danger);font-weight:500;}
+.re{font-size:9px;background:var(--surface-1);border:0.5px solid var(--border);color:var(--text-muted);padding:1px 4px;border-radius:20px;}
+.div{height:0.5px;background:var(--border);}
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.wgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;}
+.wc{background:var(--surface-1);border-radius:5px;padding:8px;}
+.tu{color:var(--text-danger);font-size:9px;margin-top:1px;}
+.td2{color:var(--text-success);font-size:9px;margin-top:1px;}
+.plist{display:flex;flex-direction:column;gap:4px;}
+.pr{display:grid;grid-template-columns:1fr 32px 44px 44px;align-items:center;gap:4px;background:var(--surface-1);border-radius:5px;padding:6px 8px;}
+.pnname{font-size:10px;font-weight:500;color:var(--text-primary);}
+.pv{font-size:11px;font-weight:500;color:var(--text-primary);text-align:center;}
+.pv.r{color:var(--text-danger);}
+.ph2{display:grid;grid-template-columns:1fr 32px 44px 44px;gap:4px;padding:0 8px;margin-bottom:3px;}
+.phh{font-size:9px;color:var(--text-muted);text-align:center;text-transform:uppercase;letter-spacing:.04em;}
+.phh:first-child{text-align:left;}
+.dim-label{font-size:9px;color:var(--text-muted);text-align:right;padding:4px 6px 2px;}
+</style>
+
+<h2 class="sr-only">Dasher dashboard as it would appear in a 1920×1080 browser window</h2>
+
+<div style="font-size:9px;color:var(--text-muted);margin-bottom:4px;text-align:right;">1920 × 1080 — Chrome</div>
+
+<div class="browser">
+  <div class="browser-bar">
+    <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    <div style="display:flex;gap:6px;align-items:center;">
+      <i class="ti ti-chevron-left" aria-hidden="true" style="font-size:13px;color:var(--text-muted);"></i>
+      <i class="ti ti-chevron-right" aria-hidden="true" style="font-size:13px;color:var(--text-muted);"></i>
+      <i class="ti ti-refresh" aria-hidden="true" style="font-size:13px;color:var(--text-muted);"></i>
+    </div>
+    <div class="urlbar">
+      <i class="ti ti-lock" aria-hidden="true" style="font-size:11px;"></i>
+      localhost:5173
+    </div>
+    <div style="display:flex;gap:6px;margin-left:auto;">
+      <i class="ti ti-star" aria-hidden="true" style="font-size:13px;color:var(--text-muted);"></i>
+      <i class="ti ti-menu-2" aria-hidden="true" style="font-size:13px;color:var(--text-muted);"></i>
+    </div>
+  </div>
+
+  <div class="screen">
+    <div class="sidebar">
+      <div class="logo">Das<span>her</span></div>
+      <div>
+        <div class="nav-s">Views</div>
+        <div style="margin-top:6px;display:flex;flex-direction:column;gap:1px;">
+          <div class="nav-i active"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> My cases</div>
+          <div class="nav-i"><i class="ti ti-chart-bar" aria-hidden="true"></i> Weekly trends</div>
+          <div class="nav-i"><i class="ti ti-building" aria-hidden="true"></i> Partner health</div>
+          <div class="nav-i"><i class="ti ti-notes" aria-hidden="true"></i> Shift log</div>
+        </div>
+      </div>
+      <div>
+        <div class="nav-s">Filters</div>
+        <div style="margin-top:6px;display:flex;flex-direction:column;gap:1px;">
+          <div class="nav-i"><i class="ti ti-alert-circle" aria-hidden="true"></i> Stale only</div>
+          <div class="nav-i"><i class="ti ti-pin" aria-hidden="true"></i> Pinned</div>
+        </div>
+      </div>
+      <div style="margin-top:auto;">
+        <div class="nav-i"><i class="ti ti-user" aria-hidden="true"></i> Anirudh G.</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="topbar">
+        <div class="topbar-t">My cases — Tue, 16 Sep</div>
+        <div class="rbtn"><i class="ti ti-refresh" aria-hidden="true" style="font-size:11px;"></i> Refresh</div>
+      </div>
+
+      <div class="content">
+
+        <div class="mgrid">
+          <div class="mc"><div class="ml">Total open</div><div class="mv">14</div><div class="msub">all priorities</div></div>
+          <div class="mc">
+            <div class="ml">By priority</div>
+            <div style="display:flex;gap:8px;margin-top:2px;">
+              <div><div class="mv d" style="font-size:14px;">2</div><div class="msub">P1</div></div>
+              <div><div class="mv w" style="font-size:14px;">5</div><div class="msub">P2</div></div>
+              <div><div class="mv" style="font-size:14px;">7</div><div class="msub">P3</div></div>
+            </div>
+          </div>
+          <div class="mc"><div class="ml">Stale cases</div><div class="mv d">4</div><div class="msub">no update &gt;48h</div></div>
+          <div class="mc"><div class="ml">Avg case age</div><div class="mv">3.2d</div><div class="msub">across open cases</div></div>
+        </div>
+
+        <div>
+          <div class="sh"><div class="st">Case attention feed</div><div class="sl">View all</div></div>
+          <div class="tbl">
+            <div class="tbl-top">
+              <div class="tbl-tt">14 open cases <span style="font-size:9px;color:var(--text-muted);margin-left:3px;">sorted by urgency</span></div>
+              <div style="display:flex;gap:4px;">
+                <div class="fbtn"><i class="ti ti-filter" aria-hidden="true" style="font-size:10px;"></i> Filter</div>
+                <div class="fbtn"><i class="ti ti-arrows-sort" aria-hidden="true" style="font-size:10px;"></i> Sort</div>
+              </div>
+            </div>
+            <div class="thead">
+              <div class="th">Case ID</div><div class="th">Subject / partner</div><div class="th">Priority</div><div class="th">Last update</div><div class="th">Last replied by</div><div class="th">Reopens</div>
+            </div>
+            <div class="tr stale">
+              <div class="td"><span class="cid">CS-10482</span></div>
+              <div class="td"><div class="subj">AS2 transmission failure</div><div class="pnm">Acme Corp</div></div>
+              <div class="td"><span class="pb p1">P1</span></div>
+              <div class="td"><span class="sf"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;"></i> 3 days ago</span></div>
+              <div class="td"><span class="rt"><i class="ti ti-user" aria-hidden="true" style="font-size:10px;"></i> Partner — 3d ago</span></div>
+              <div class="td"><span class="re">3</span></div>
+            </div>
+            <div class="tr stale">
+              <div class="td"><span class="cid">CS-10491</span></div>
+              <div class="td"><div class="subj">EDI 850 map mismatch</div><div class="pnm">Beta Logistics</div></div>
+              <div class="td"><span class="pb p1">P1</span></div>
+              <div class="td"><span class="sf"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;"></i> 18 hrs ago</span></div>
+              <div class="td"><span class="ry"><i class="ti ti-user" aria-hidden="true" style="font-size:10px;"></i> You — 18h ago</span></div>
+              <div class="td"><span style="font-size:9px;color:var(--text-muted);">—</span></div>
+            </div>
+            <div class="tr risk">
+              <div class="td"><span class="cid">CS-10503</span></div>
+              <div class="td"><div class="subj">SFTP connection timeout</div><div class="pnm">Globex Inc</div></div>
+              <div class="td"><span class="pb p2">P2</span></div>
+              <div class="td"><span class="sf"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;"></i> 52 hrs ago</span></div>
+              <div class="td"><span class="rt"><i class="ti ti-user" aria-hidden="true" style="font-size:10px;"></i> Partner — 2d ago</span></div>
+              <div class="td"><span class="re">1</span></div>
+            </div>
+            <div class="tr risk">
+              <div class="td"><span class="cid">CS-10498</span></div>
+              <div class="td"><div class="subj">X12 997 ack not received</div><div class="pnm">Initech</div></div>
+              <div class="td"><span class="pb p2">P2</span></div>
+              <div class="td"><span class="of">22 hrs ago</span></div>
+              <div class="td"><span class="ry"><i class="ti ti-user" aria-hidden="true" style="font-size:10px;"></i> You — 22h ago</span></div>
+              <div class="td"><span style="font-size:9px;color:var(--text-muted);">—</span></div>
+            </div>
+            <div class="tr ok">
+              <div class="td"><span class="cid">CS-10517</span></div>
+              <div class="td"><div class="subj">Certificate renewal query</div><div class="pnm">Initech</div></div>
+              <div class="td"><span class="pb p2">P2</span></div>
+              <div class="td"><span class="of">4 hrs ago</span></div>
+              <div class="td"><span class="ry"><i class="ti ti-user" aria-hidden="true" style="font-size:10px;"></i> You — 4h ago</span></div>
+              <div class="td"><span style="font-size:9px;color:var(--text-muted);">—</span></div>
+            </div>
+            <div class="tr ok">
+              <div class="td"><span class="cid">CS-10521</span></div>
+              <div class="td"><div class="subj">Onboarding — test message fail</div><div class="pnm">Momentum Co</div></div>
+              <div class="td"><span class="pb p3">P3</span></div>
+              <div class="td"><span class="of">6 hrs ago</span></div>
+              <div class="td"><span class="rt"><i class="ti ti-user" aria-hidden="true" style="font-size:10px;"></i> Partner — 6h ago</span></div>
+              <div class="td"><span style="font-size:9px;color:var(--text-muted);">—</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="div"></div>
+
+        <div class="bgrid">
+          <div>
+            <div class="sh"><div class="st">Weekly trends</div><div class="sl">Full report</div></div>
+            <div class="wgrid">
+              <div class="wc"><div class="ml">Opened</div><div class="mv" style="font-size:15px;">8</div><div class="tu"><i class="ti ti-arrow-up" aria-hidden="true"></i> +2 vs last week</div></div>
+              <div class="wc"><div class="ml">Closed</div><div class="mv" style="font-size:15px;">6</div><div class="td2"><i class="ti ti-arrow-down" aria-hidden="true"></i> −1 vs last week</div></div>
+            </div>
+          </div>
+          <div>
+            <div class="sh"><div class="st">Partner health</div><div class="sl">View all</div></div>
+            <div class="ph2">
+              <div class="phh">Partner</div><div class="phh">Open</div><div class="phh">Avg age</div><div class="phh">Repeats</div>
+            </div>
+            <div class="plist">
+              <div class="pr"><div class="pnname">Acme Corp</div><div><div class="pv r">3</div></div><div><div class="pv">4.1d</div></div><div><div class="pv r">2</div></div></div>
+              <div class="pr"><div class="pnname">Globex Inc</div><div><div class="pv r">4</div></div><div><div class="pv r">6.2d</div></div><div><div class="pv r">3</div></div></div>
+              <div class="pr"><div class="pnname">Beta Logistics</div><div><div class="pv">2</div></div><div><div class="pv">2.8d</div></div><div><div class="pv">0</div></div></div>
+              <div class="pr"><div class="pnname">Initech</div><div><div class="pv">1</div></div><div><div class="pv">1.9d</div></div><div><div class="pv">0</div></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
